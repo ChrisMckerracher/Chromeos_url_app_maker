@@ -1,0 +1,41 @@
+if [ $1 ] && [ $2 ] && [ $3 ]; then
+
+    echo app name: $1
+    echo icon: $2
+    echo url: $3
+    echo please ensure your url either contains http://, or https://
+    echo is this correct? y/n: 
+    read input
+
+    while [[ $input != 'y' && $input != 'n' ]]; do
+        echo not a valid input. please input y or n
+        read input
+        done
+
+    case $input in
+
+    y)
+        mkdir $1
+        cd $1
+        echo "{\"manifest_version\": 2," >> manifest.json
+        echo "\"name\": \"$1\"," >> manifest.json
+        echo "\"version\": \"1.0\"," >> manifest.json
+        echo "\"icons\": {\"16\": \"$2\"," >> manifest.json
+        echo "\"128\": \"$2\"}," >> manifest.json
+        echo "\"app\": {" >> manifest.json
+        echo "\"urls\": [" >> manifest.json 
+        echo "\"$3\"]," >> manifest.json
+        echo "\"launch\": {\"web_url\": \"$3\"}}}" >> manifest.json
+        mv ../$2 ./
+    ;;
+
+    n) 
+        echo everyone makes mistakes, try again
+    ;;
+    esac
+
+    else
+        echo incorrect syntax! please write it as:
+        echo Script app_name app_icon app_url
+    fi
+
