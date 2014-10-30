@@ -15,8 +15,8 @@ if [ $1 ] && [ $2 ] && [ $3 ]; then
     case $input in
 
     y)
-        mkdir "$1_app"
-        cd "$1_app"
+        mkdir "$1"_app
+        cd "$1"_app
         echo "{\"manifest_version\": 2," >> manifest.json
         echo "\"name\": \"$1\"," >> manifest.json
         echo "\"version\": \"1.0\"," >> manifest.json
